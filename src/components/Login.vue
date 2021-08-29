@@ -2,7 +2,15 @@
   <h1>login</h1>
   <router-link to="/welcome">首页</router-link>
 </template>
-<script setup>
+<script>
+export default {
+  name: 'Login',
+  mounted(){
+    this.$request.get('/login', {}, {}).then(res => {
+      console.log(res);
+    })
+  }
+}
 </script>
 
 <style scoped>
