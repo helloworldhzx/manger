@@ -6,6 +6,7 @@
 export default {
   name: 'Login',
   mounted(){
+    this.$storage.clearStorage('age')
     this.$request.get('/login', {}, {}).then(res => {
       console.log(res);
     })
