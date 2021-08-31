@@ -18,7 +18,7 @@ service.interceptors.response.use((res) => {
   const { code, data, msg } = res.data;
   if(code === 200){
     return data;
-  } else if(code === 40001){
+  } else if(code === 50001){
     ElMessage.error(TOKEN_ERROR);
     return Promise.reject(TOKEN_ERROR)
   } else{
