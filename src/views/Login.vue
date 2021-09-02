@@ -41,6 +41,10 @@ export default {
         if(valid){
           this.$api.login(this.user).then(res => {
             console.log(res)
+            if(res){
+              this.$router.push('/welcome')
+              this.$store.commit("saveUserInfo", res)
+            }
           })
         }
       })

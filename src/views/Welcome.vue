@@ -3,11 +3,9 @@
   <el-button @click="goHome">登录</el-button>
 </template>
 <script setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
-const goHome = () => {
-  router.push("/login")
-}
+import { useStore } from "vuex";
+const store = useStore();
+console.log(store.state.userInfo)
 </script>
 
 <style scoped>
