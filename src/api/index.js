@@ -7,6 +7,12 @@ const api = {
       method: 'post',
       data: params
     })
+  },
+  getMuneList(){
+    return request({
+      url: '/menu/list',
+      method: 'get'
+    })
   }
 }
 export default api
