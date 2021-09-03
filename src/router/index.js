@@ -13,19 +13,12 @@ const routes = [{
       title: '欢迎页'
     },
     component: () => import('./../views/Welcome.vue'),
-  },{
-    path: "user",
+  }, {
+    path: "/system/user",
     meta: {
       title: '用户'
     },
-    component: () => import('./../views/Welcome.vue'),
-    children: [{
-      path: "zz",
-      meta: {
-        title: 'zz'
-      },
-      component: () => import('./../views/Welcome.vue'),
-    }],
+    component: () => import('./../views/User.vue')
   }]
 },
 {

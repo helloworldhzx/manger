@@ -13,6 +13,39 @@ const api = {
       url: '/menu/list',
       method: 'get'
     })
-  }
+  },
+  getUserList(params) {
+    return request({
+      url: '/user/list',
+      method: 'get',
+      data: params
+    })
+  },
+  getRoleList() {
+    return request({
+      url: '/role/allList',
+      method: 'get'
+    })
+  },
+  getDeptList() {
+    return request({
+      url: '/dept/list',
+      method: 'get'
+    })
+  },
+  userSubmit(data) {
+    return request({
+      url: '/user/operate',
+      method: 'post',
+      data
+    })
+  },
+  userDel(data) {
+    return request({
+      url: '/user/delete',
+      method: 'post',
+      data
+    })
+  },
 }
 export default api

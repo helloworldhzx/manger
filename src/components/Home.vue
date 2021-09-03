@@ -1,6 +1,6 @@
 <template>
   <div class="basic-layout">
-    <div :class="['nav-side', isCollapse?'fold':'unfold']">
+    <div :class="['nav-side', isCollapse ? 'fold' : 'unfold']">
       <div class="logo">
         <img src="../assets/logo.png" />
         <span>zz</span>
@@ -12,11 +12,12 @@
         background-color="#001529"
         text-color="#fff"
         active-text-color="#ffd04b"
+        router
       >
         <tree-menu :list="menuList" />
       </el-menu>
     </div>
-    <div :class="['content-right', isCollapse?'fold':'unfold']">
+    <div :class="['content-right', isCollapse ? 'fold' : 'unfold']">
       <div class="nav-top">
         <div class="nav-left">
           <div class="toggle" @click="toggle">
@@ -44,9 +45,7 @@
         </div>
       </div>
       <div class="wrapper">
-        <div class="main">
-          <router-view></router-view>
-        </div>
+        <router-view></router-view>
       </div>
     </div>
   </div>
@@ -99,10 +98,10 @@ export default {
     overflow-y: auto;
     overflow-x: hidden;
     transition: width 0.5s;
-    &.unfold{
+    &.unfold {
       width: 200px;
     }
-    &.fold{
+    &.fold {
       width: 64px;
     }
     .logo {
@@ -123,10 +122,10 @@ export default {
   }
   .content-right {
     margin-left: 200px;
-     &.unfold{
+    &.unfold {
       margin-left: 200px;
     }
-    &.fold{
+    &.fold {
       margin-left: 64px;
     }
     .nav-top {
@@ -157,10 +156,7 @@ export default {
       padding: 20px;
       background: #eef0f3;
       height: calc(100vh - 50px);
-      .main {
-        background-color: #fff;
-        height: 100%;
-      }
+      overflow: auto;
     }
   }
 }
