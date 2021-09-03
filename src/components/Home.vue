@@ -65,11 +65,11 @@ export default {
     };
   },
   mounted() {
-    this.getMuneList();
+    this.getMenuList();
   },
   methods: {
-    getMuneList() {
-      this.$api.getMuneList().then((res) => {
+    getMenuList() {
+      this.$api.getMenuList().then((res) => {
         console.log(res);
         this.menuList = res;
       });
