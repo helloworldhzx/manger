@@ -138,15 +138,20 @@ export default {
   setup() {
     // ctx 生产环境是获取不到全局属性 如$api (我这开发时就获取不到) 使用proxy获取
     const { proxy } = getCurrentInstance();
+
+    // 搜索
     const queryForm = reactive({ state: 0 });
-    const dialogForm = reactive({ state: 3 });
-    const pager = reactive({ pageSize: 10, pageNum: 1 });
+    const handleSearch = () => {
+      getUserList();
+    };
+    const handleReset = (form) => {
+      proxy.$refs[form].resetFields();
+    };
+
+    // 表格
     const tableData = ref([]);
-    const roleData = ref([]);
-    const deptData = ref([]);
+    const pager = reactive({ pageSize: 10, pageNum: 1 });
     const checkedUserIds = ref([]);
-    const dialogVisible = ref(false);
-    const action = ref("add");
     const columns = reactive([
       {
         label: "用户ID",
@@ -222,11 +227,6 @@ export default {
         },
       ],
     });
-    onMounted(() => {
-      getUserList();
-      getRoleList();
-      getDeptList();
-    });
     const getUserList = () => {
       const params = { ...queryForm, ...pager };
       proxy.$api.getUserList(params).then((res) => {
@@ -235,43 +235,9 @@ export default {
         pager.total = page.total;
       });
     };
-    const getRoleList = () => {
-      proxy.$api.getRoleList().then((res) => {
-        roleData.value = res;
-      });
-    };
-    const getDeptList = () => {
-      proxy.$api.getDeptList().then((res) => {
-        deptData.value = res;
-      });
-    };
-    const handleReset = (form) => {
-      proxy.$refs[form].resetFields();
-    };
-    const handleSearch = () => {
-      getUserList();
-    };
     const handleAdd = () => {
       action.value = "add";
       dialogVisible.value = true;
-    };
-    const handleClose = () => {
-      dialogVisible.value = false;
-    };
-    const dialogClose = () => {
-      handleReset("dialogFormRef");
-    };
-    const handleSubmit = () => {
-      proxy.$refs.dialogFormRef.validate(async (valid) => {
-        if (valid) {
-          const params = toRaw(dialogForm);
-          params.action = action.value;
-          params.userEmail += "@zz.com";
-          await proxy.$api.userSubmit(params);
-          dialogVisible.value = false;
-          proxy.$message.success("添加成功");
-        }
-      });
     };
     const handleEdit = (row) => {
       dialogVisible.value = true;
@@ -300,6 +266,48 @@ export default {
       pager.pageNum = current;
       getUserList();
     };
+
+    // 弹框
+    const dialogForm = reactive({ state: 3 });
+    const roleData = ref([]);
+    const deptData = ref([]);
+    const dialogVisible = ref(false);
+    const action = ref("add");
+    const getRoleList = () => {
+      proxy.$api.getRoleList().then((res) => {
+        roleData.value = res;
+      });
+    };
+    const getDeptList = () => {
+      proxy.$api.getDeptList().then((res) => {
+        deptData.value = res;
+      });
+    };
+
+    const handleClose = () => {
+      dialogVisible.value = false;
+    };
+    const dialogClose = () => {
+      handleReset("dialogFormRef");
+    };
+    const handleSubmit = () => {
+      proxy.$refs.dialogFormRef.validate(async (valid) => {
+        if (valid) {
+          const params = toRaw(dialogForm);
+          params.action = action.value;
+          params.userEmail += "@zz.com";
+          await proxy.$api.userSubmit(params);
+          dialogVisible.value = false;
+          proxy.$message.success("添加成功");
+        }
+      });
+    };
+
+    onMounted(() => {
+      getUserList();
+      getRoleList();
+      getDeptList();
+    });
     return {
       queryForm,
       columns,

@@ -1,13 +1,13 @@
 <template>
   <div class="welcome">
-    <!-- <div class="content">
+    <div class="content">
       <div class="title">zz</div>
       <div class="text">vue3+elementPlus+koa2</div>
       <div class="desc">
         ——和所有以梦为詹的诗人一在了可，我借此火得度一生的茫茫黑夜。
       </div>
     </div>
-    <div class="img"></div> -->
+    <div class="img"></div>
   </div>
 </template>
 <script setup>
@@ -18,6 +18,7 @@ console.log(store.state.userInfo);
 
 <style scoped lang='scss'>
 .welcome {
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

@@ -7,7 +7,7 @@
       </div>
       <el-menu
         :collapse="isCollapse"
-        default-active="2"
+        :default-active="activeMenu"
         class="nav-menu"
         background-color="#001529"
         text-color="#fff"
@@ -61,6 +61,7 @@ export default {
       isCollapse: false,
       menuList: [],
       userInfo: this.$store.state.userInfo,
+      activeMenu: location.hash.slice(1),
     };
   },
   mounted() {
