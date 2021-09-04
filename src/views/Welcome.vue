@@ -10,11 +10,7 @@
     <div class="img"></div>
   </div>
 </template>
-<script setup>
-import { useStore } from "vuex";
-const store = useStore();
-console.log(store.state.userInfo);
-</script>
+<script></script>
 
 <style scoped lang='scss'>
 .welcome {

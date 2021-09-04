@@ -12,9 +12,6 @@
 <script>
 export default {
   name: "Breadcrumb",
-  mounted() {
-    console.log(this.$route);
-  },
   computed: {
     breadList() {
       return this.$route.matched;

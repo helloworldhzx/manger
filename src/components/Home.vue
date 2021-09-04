@@ -70,7 +70,6 @@ export default {
   methods: {
     getMenuList() {
       this.$api.getMenuList().then((res) => {
-        console.log(res);
         this.menuList = res;
       });
     },

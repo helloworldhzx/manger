@@ -2,6 +2,7 @@ import axios from "axios";
 import { ElMessage } from "element-plus";
 import config from "./../config";
 import storage from "./storage"
+import router from './../router'
 const TOKEN_ERROR = "token验证失败，请重新登录"
 const NETWORKE_ERROR = "网络异常，请稍后再试"
 const service = axios.create({
@@ -21,6 +22,7 @@ service.interceptors.response.use((res) => {
     return data;
   } else if (code === 500001) {
     ElMessage.error(TOKEN_ERROR);
+    router.push('/login')
     return Promise.reject(TOKEN_ERROR)
   } else {
     ElMessage.error(msg || NETWORKE_ERROR);
@@ -33,13 +35,15 @@ function request(option) {
   if (option.method.toLowerCase() === 'get') {
     option.params = option.data
   }
-
   if (config.env === 'prod') {
     service.defaults.baseURL = config.baseApi
   } else {
-    service.defaults.baseURL = config.mock ? config.mockApi : config.baseApi
+    let isMock = config.mock;
+    if ("mock" in option) {
+      isMock = option.mock
+    }
+    service.defaults.baseURL = isMock ? config.mockApi : config.baseApi
   }
-  console.log(option)
   return service(option)
 }
 

@@ -8,8 +8,6 @@ import api from './api'
 import store from "./store"
 import 'element-plus/dist/index.css'
 
-console.log('环境变量', import.meta.env)
-
 const app = createApp(App);
 app.config.globalProperties.$request = request
 app.config.globalProperties.$storage = storage

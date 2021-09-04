@@ -60,7 +60,7 @@
       <el-pagination
         class="pagination"
         background
-        layout="prev, pager, next, sizes"
+        layout="prev, pager, next"
         :total="pager.total"
         @current-change="handleCurrentChange"
       >
@@ -75,12 +75,17 @@
       >
         <el-form-item label="用户名" prop="userName">
           <el-input
+            :disabled="action === 'edit'"
             v-model="dialogForm.userName"
             placeholder="请输入用户名称"
           />
         </el-form-item>
         <el-form-item label="邮箱" prop="userEmail">
-          <el-input v-model="dialogForm.userEmail" placeholder="请输入邮箱">
+          <el-input
+            :disabled="action === 'edit'"
+            v-model="dialogForm.userEmail"
+            placeholder="请输入邮箱"
+          >
             <template #append>@zz.com</template>
           </el-input>
         </el-form-item>
@@ -133,6 +138,7 @@
 </template>
 <script>
 import { getCurrentInstance, reactive, ref, toRaw, onMounted } from "vue";
+import utils from "./../utils/utils";
 export default {
   name: "user",
   setup() {
@@ -150,7 +156,7 @@ export default {
 
     // 表格
     const tableData = ref([]);
-    const pager = reactive({ pageSize: 10, pageNum: 1 });
+    const pager = reactive({ pageSize: 10, pageNum: 1, total: 0 });
     const checkedUserIds = ref([]);
     const columns = reactive([
       {
@@ -190,11 +196,17 @@ export default {
         label: "注册时间",
         prop: "createTime",
         width: 180,
+        formatter(row, column, value) {
+          return utils.formateDate(new Date(value));
+        },
       },
       {
         label: "最后登录时间",
         prop: "lastLoginTime",
         width: 180,
+        formatter(row, column, value) {
+          return utils.formateDate(new Date(value));
+        },
       },
     ]);
     const rules = reactive({
@@ -293,12 +305,13 @@ export default {
     const handleSubmit = () => {
       proxy.$refs.dialogFormRef.validate(async (valid) => {
         if (valid) {
-          const params = toRaw(dialogForm);
+          const params = { ...dialogForm };
           params.action = action.value;
           params.userEmail += "@zz.com";
           await proxy.$api.userSubmit(params);
           dialogVisible.value = false;
           proxy.$message.success("添加成功");
+          getUserList();
         }
       });
     };
@@ -318,6 +331,7 @@ export default {
       rules,
       deptData,
       roleData,
+      action,
       handleReset,
       handleSearch,
       handleAdd,
