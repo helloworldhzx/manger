@@ -43,11 +43,31 @@ const api = {
       data
     })
   },
-  getRoleList() {
+  getAllRoleList() {
     return request({
       url: '/role/allList',
       method: 'get',
-      mock: true
+    })
+  },
+  getRoleList(data) {
+    return request({
+      url: '/role/list',
+      method: 'get',
+      data
+    })
+  },
+  roleSubmit(data) {
+    return request({
+      url: '/role/operate',
+      method: 'post',
+      data
+    })
+  },
+  updatePermission(data) {
+    return request({
+      url: '/role/update/permission',
+      method: 'post',
+      data
     })
   },
   getDeptList() {

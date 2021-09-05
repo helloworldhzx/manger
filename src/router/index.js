@@ -30,7 +30,7 @@ const routes = [{
     meta: {
       title: '角色管理'
     },
-    component: () => import('./../views/User.vue')
+    component: () => import('./../views/Role.vue')
   }, {
     path: "/system/dept",
     meta: {

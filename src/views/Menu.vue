@@ -15,7 +15,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="handleSearch">查询</el-button>
+          <el-button type="primary" @click="getMenuList">查询</el-button>
           <el-button @click="handleReset('queryFormRef')">重置</el-button>
         </el-form-item>
       </el-form>
@@ -245,9 +245,6 @@ export default {
     async handleDel(_id) {
       await this.$api.menuSubmit({ _id, action: "delet" });
       this.$message.success("删除成功");
-      this.getMenuList();
-    },
-    handleSearch() {
       this.getMenuList();
     },
     handleReset(form) {

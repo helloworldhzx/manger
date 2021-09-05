@@ -285,8 +285,8 @@ export default {
     const deptData = ref([]);
     const dialogVisible = ref(false);
     const action = ref("add");
-    const getRoleList = () => {
-      proxy.$api.getRoleList().then((res) => {
+    const getAllRoleList = () => {
+      proxy.$api.getAllRoleList().then((res) => {
         roleData.value = res;
       });
     };
@@ -318,7 +318,7 @@ export default {
 
     onMounted(() => {
       getUserList();
-      getRoleList();
+      getAllRoleList();
       getDeptList();
     });
     return {
