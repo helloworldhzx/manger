@@ -69,8 +69,8 @@ export default {
   },
   methods: {
     getMenuList() {
-      this.$api.getMenuList().then((res) => {
-        this.menuList = res;
+      this.$api.getPermissionMenu().then(({ menuList, actionList }) => {
+        this.menuList = menuList;
       });
     },
     handleLogout(value) {

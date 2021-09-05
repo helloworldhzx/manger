@@ -15,6 +15,12 @@ const api = {
       data: params
     })
   },
+  getAllUserList() {
+    return request({
+      url: '/user/alllist',
+      method: 'get'
+    })
+  },
   userSubmit(data) {
     return request({
       url: '/user/operate',
@@ -34,6 +40,12 @@ const api = {
       url: '/menu/list',
       method: 'get',
       data
+    })
+  },
+  getPermissionMenu() {
+    return request({
+      url: '/menu/permissionList',
+      method: 'get'
     })
   },
   menuSubmit(data) {
@@ -70,11 +82,18 @@ const api = {
       data
     })
   },
-  getDeptList() {
+  getDeptList(data) {
     return request({
       url: '/dept/list',
       method: 'get',
-      mock: true
+      data
+    })
+  },
+  deptSubmit(data) {
+    return request({
+      url: '/dept/operate',
+      method: 'post',
+      data
     })
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="user-wrapper">
+  <div class="role-wrapper">
     <div class="query-form">
       <el-form ref="queryFormRef" :inline="true" :model="queryForm">
         <el-form-item label="角色名称" prop="roleName">

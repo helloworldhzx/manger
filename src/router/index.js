@@ -36,7 +36,7 @@ const routes = [{
     meta: {
       title: '部门管理'
     },
-    component: () => import('./../views/User.vue')
+    component: () => import('./../views/Dept.vue')
   }]
 },
 {
