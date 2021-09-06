@@ -1,11 +1,11 @@
 const utils = {
-  formateDate(date, fmt = "yyyy-MM-DD HH:mm:ss") {
+  formateDate(date, fmt = "yyyy-MM-dd HH:mm:ss") {
     if (/(y+)/.test(fmt)) {
       fmt = fmt.replace(RegExp.$1, date.getFullYear())
     }
     var o = {
       "M+": date.getMonth() + 1,
-      "D+": date.getDate(),
+      "d+": date.getDate(),
       "H+": date.getHours(),
       "m+": date.getMinutes(),
       "s+": date.getSeconds()

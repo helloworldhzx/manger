@@ -16,10 +16,11 @@
         </el-form-item>
         <el-form-item label="状态" prop="state">
           <el-select v-model="queryForm.state">
-            <el-option label="所有" :value="0"></el-option>
-            <el-option label="在职" :value="1"></el-option>
-            <el-option label="离职" :value="2"></el-option>
-            <el-option label="试用期" :value="3"></el-option>
+            <el-option
+              v-for="(val, key) in userState"
+              :label="val"
+              :value="Number(key)"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -108,9 +109,11 @@
         </el-form-item>
         <el-form-item label="状态" prop="state">
           <el-select v-model="dialogForm.state">
-            <el-option :value="1" label="在职"></el-option>
-            <el-option :value="2" label="离职"></el-option>
-            <el-option :value="3" label="试用期"></el-option>
+            <el-option
+              v-for="(val, key) in userState"
+              :value="Number(key)"
+              :label="val"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item label="系统角色" prop="roleList">
@@ -148,8 +151,9 @@
   </div>
 </template>
 <script>
-import { getCurrentInstance, reactive, ref, toRaw, onMounted } from "vue";
+import { getCurrentInstance, reactive, ref, onMounted } from "vue";
 import utils from "./../utils/utils";
+import dict from "../utils/dict";
 export default {
   name: "user",
   setup() {
@@ -186,21 +190,14 @@ export default {
         label: "用户角色",
         prop: "role",
         formatter(row, column, value) {
-          return {
-            0: "管理员",
-            1: "普通用户",
-          }[value];
+          return dict.userType[value];
         },
       },
       {
         label: "用户状态",
         prop: "state",
         formatter(row, column, value) {
-          return {
-            1: "在职",
-            2: "离职",
-            3: "试用期",
-          }[value];
+          return dict.userState[value];
         },
       },
       {
@@ -333,6 +330,8 @@ export default {
       getDeptList();
     });
     return {
+      userType: dict.userType,
+      userState: dict.userState,
       queryForm,
       columns,
       tableData,

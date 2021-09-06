@@ -38,13 +38,17 @@ const router = createRouter({
 export async function loadAsyncRoutes() {
   const userInfo = storage.getItem("userInfo") || {}
   if (userInfo.token) {
-    const { menuList } = await API.getPermissionMenu();
-    const routers = utils.generateRoute(menuList)
-    routers.forEach(item => {
-      const url = `../views/${item.component}.vue`
-      item.component = () => import(url)
-      router.addRoute("home", item)
-    })
+    try {
+      const { menuList } = await API.getPermissionMenu();
+      const routers = utils.generateRoute(menuList)
+      routers.forEach(item => {
+        const url = `../views/${item.component}.vue`
+        item.component = () => import(url)
+        router.addRoute("home", item)
+      })
+    } catch (error) {
+
+    }
   }
 
 }

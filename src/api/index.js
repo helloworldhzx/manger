@@ -96,5 +96,26 @@ const api = {
       data
     })
   },
+  getLeaveList(data) {
+    return request({
+      url: '/leave/list',
+      method: 'get',
+      data
+    })
+  },
+  leaveSubmit(data) {
+    return request({
+      url: '/leave/operate',
+      method: 'post',
+      data
+    })
+  },
+  leaveApprove(data) {
+    return request({
+      url: '/leave/approve',
+      method: 'post',
+      data
+    })
+  }
 }
 export default api

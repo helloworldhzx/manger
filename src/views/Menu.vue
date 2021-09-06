@@ -10,8 +10,11 @@
         </el-form-item>
         <el-form-item label="菜单状态" prop="menuState">
           <el-select v-model="queryForm.menuState">
-            <el-option label="启用" :value="1"></el-option>
-            <el-option label="停用" :value="2"></el-option>
+            <el-option
+              v-for="(val, key) in menuState"
+              :label="val"
+              :value="Number(key)"
+            ></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -72,8 +75,9 @@
         </el-form-item>
         <el-form-item label="菜单类型" prop="menuType">
           <el-radio-group v-model="dialogForm.menuType">
-            <el-radio :label="1">菜单</el-radio>
-            <el-radio :label="2">按钮</el-radio>
+            <el-radio v-for="(val, key) in menuType" :label="Number(key)">{{
+              val
+            }}</el-radio>
           </el-radio-group>
         </el-form-item>
         <el-form-item label="菜单名称" prop="menuName">
@@ -122,8 +126,10 @@
           v-show="dialogForm.menuType == 1"
         >
           <el-radio-group v-model="dialogForm.menuState">
-            <el-radio :label="1">正常</el-radio>
-            <el-radio :label="2">停用</el-radio>
+            <el-radio v-for="(val, key) in menuState" :label="Number(key)">{{
+              val
+            }}</el-radio>
+            <!-- <el-radio :label="2">停用</el-radio> -->
           </el-radio-group>
         </el-form-item>
       </el-form>
@@ -137,11 +143,14 @@
   </div>
 </template>
 <script>
+import dict from "../utils/dict";
 import utils from "../utils/utils";
 export default {
   name: "menu",
   data() {
     return {
+      menuState: dict.menuState,
+      menuType: dict.menuType,
       columns: [
         {
           label: "菜单名称",
@@ -156,10 +165,7 @@ export default {
           label: "菜单类型",
           prop: "menuType",
           formatter(row, column, value) {
-            return {
-              1: "菜单",
-              2: "按钮",
-            }[value];
+            return dict.menuType[value];
           },
         },
         {
@@ -179,10 +185,7 @@ export default {
           prop: "menuState",
           width: 90,
           formatter(row, column, value) {
-            return {
-              1: "正常",
-              2: "停用",
-            }[value];
+            return dict.menuState[value];
           },
         },
         {
