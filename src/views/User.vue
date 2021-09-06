@@ -30,8 +30,15 @@
     </div>
     <div class="base-table">
       <div class="action">
-        <el-button type="primary" @click="handleAdd">新增</el-button>
-        <el-button type="danger" @click="handlePatchDel">批量删除</el-button>
+        <el-button type="primary" @click="handleAdd" v-has="'user-add'"
+          >新增</el-button
+        >
+        <el-button
+          type="danger"
+          @click="handlePatchDel"
+          v-has="'user-batch-delete'"
+          >批量删除</el-button
+        >
       </div>
       <el-table :data="tableData" @selection-change="handleSelectionChange">
         <el-table-column type="selection" width="55" />
@@ -45,13 +52,17 @@
         </el-table-column>
         <el-table-column label="操作" width="150">
           <template #default="scope">
-            <el-button size="mini" @click="handleEdit(scope.row)"
+            <el-button
+              size="mini"
+              @click="handleEdit(scope.row)"
+              v-has="'user-edit'"
               >编辑</el-button
             >
             <el-button
               size="mini"
               type="danger"
               @click="handleDel([scope.row.userId])"
+              v-has="'user-delete'"
               >删除</el-button
             >
           </template>

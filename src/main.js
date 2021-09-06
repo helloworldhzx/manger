@@ -9,6 +9,14 @@ import store from "./store"
 import 'element-plus/dist/index.css'
 
 const app = createApp(App);
+app.directive('has', function (el, binding) {
+  if (!store.state.actionList.includes(binding.value)) {
+    el.style = 'display:none';
+    setTimeout(() => {
+      el.parentNode && el.parentNode.removeChild(el);
+    }, 0)
+  }
+})
 app.config.globalProperties.$request = request
 app.config.globalProperties.$storage = storage
 app.config.globalProperties.$api = api

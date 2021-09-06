@@ -17,6 +17,28 @@ const utils = {
       }
     }
     return fmt;
+  },
+  generateRoute(menuList) {
+    const list = []
+    function deep(arr) {
+      arr.forEach(item => {
+        if (item.action) {
+          list.push({
+            name: item.component,
+            path: item.path,
+            meta: {
+              title: item.menuName
+            },
+            component: item.component,
+          })
+        }
+        if (item.children && !item.action) {
+          deep(item.children)
+        }
+      })
+    }
+    deep(menuList)
+    return list
   }
 }
 

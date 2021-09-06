@@ -71,6 +71,8 @@ export default {
     getMenuList() {
       this.$api.getPermissionMenu().then(({ menuList, actionList }) => {
         this.menuList = menuList;
+        this.$store.commit("saveActionList", actionList);
+        this.$store.commit("saveMenuList", menuList);
       });
     },
     handleLogout(value) {

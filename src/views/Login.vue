@@ -17,6 +17,7 @@
   </div>
 </template>
 <script>
+import { loadAsyncRoutes } from "../router";
 export default {
   name: "Login",
   data() {
@@ -37,10 +38,11 @@ export default {
     login() {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.$api.login(this.user).then((res) => {
+          this.$api.login(this.user).then(async (res) => {
             if (res) {
-              this.$router.push("/welcome");
               this.$store.commit("saveUserInfo", res);
+              await loadAsyncRoutes();
+              this.$router.push("/welcome");
             }
           });
         }
