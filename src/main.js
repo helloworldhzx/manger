@@ -7,6 +7,7 @@ import storage from './utils/storage'
 import api from './api'
 import store from "./store"
 import 'element-plus/dist/index.css'
+import Vue2OrgTree from './components/orgTree/main'
 
 const app = createApp(App);
 app.directive('has', function (el, binding) {
@@ -20,4 +21,4 @@ app.directive('has', function (el, binding) {
 app.config.globalProperties.$request = request
 app.config.globalProperties.$storage = storage
 app.config.globalProperties.$api = api
-app.use(router).use(store).use(ElementPlus).mount('#app')
+app.use(router).use(store).use(ElementPlus).use(Vue2OrgTree).mount('#app')
